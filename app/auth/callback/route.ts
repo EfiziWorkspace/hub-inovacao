@@ -5,8 +5,11 @@ import { createAdminClient } from '@/lib/supabase/admin'
 const ALLOWED_DOMAIN = 'efizi.com.br'
 
 export async function GET(request: Request) {
-  const { searchParams, origin } = new URL(request.url)
+  const { searchParams, origin: rawOrigin } = new URL(request.url)
   const code = searchParams.get('code')
+
+  // Em produção, usar o Site URL configurado no Supabase
+  const origin = process.env.NEXT_PUBLIC_SITE_URL || rawOrigin
 
   if (!code) {
     return NextResponse.redirect(`${origin}/login?error=no_code`)
