@@ -1,43 +1,16 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-
-// Mock Supabase admin client
-const mockSelect = vi.fn()
-const mockFrom = vi.fn(() => ({
-  select: mockSelect,
-}))
-const mockEq = vi.fn()
-const mockIn = vi.fn()
+import { describe, it, expect, vi } from 'vitest'
 
 vi.mock('@/lib/supabase/admin', () => ({
   createAdminClient: () => ({
-    from: (table: string) => {
-      mockFrom(table)
-      return {
-        select: (cols: string, opts?: any) => {
-          mockSelect(cols, opts)
-          const chain = {
-            eq: (col: string, val: string) => {
-              mockEq(col, val)
-              return chain
-            },
-            in: (col: string, vals: string[]) => {
-              mockIn(col, vals)
-              return chain
-            },
-            then: (resolve: any) => {
-              // Default: return count 0
-              resolve({ count: 0 })
-            },
-          }
-          // Make it thenable for Promise.all
-          return Object.assign(chain, {
-            [Symbol.toStringTag]: 'Promise',
-            then: (onFulfilled: any) => Promise.resolve({ count: 0 }).then(onFulfilled),
-            catch: (onRejected: any) => Promise.resolve({ count: 0 }).catch(onRejected),
-          })
-        },
-      }
-    },
+    from: () => ({
+      select: () => ({
+        eq: function () { return this },
+        in: function () { return this },
+        then: (resolve: (val: { count: number }) => void) => resolve({ count: 0 }),
+        catch: () => {},
+        [Symbol.toStringTag]: 'Promise',
+      }),
+    }),
   }),
 }))
 
@@ -48,7 +21,6 @@ describe('Badge definitions', () => {
 
     expect(badges).toHaveLength(6)
 
-    // All badges should have required fields
     for (const badge of badges) {
       expect(badge).toHaveProperty('type')
       expect(badge).toHaveProperty('label')
