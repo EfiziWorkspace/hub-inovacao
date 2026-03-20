@@ -4,7 +4,6 @@ import { useTheme } from 'next-themes'
 import { useEffect, useState, useCallback } from 'react'
 import { Moon, Sun } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { motion, AnimatePresence } from 'framer-motion'
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
@@ -15,15 +14,16 @@ export function ThemeToggle() {
   const toggleTheme = useCallback(() => {
     const root = document.documentElement
     root.classList.add('theme-transition')
-
     setTheme(theme === 'dark' ? 'light' : 'dark')
 
-    setTimeout(() => {
-      root.classList.remove('theme-transition')
-    }, 500)
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        root.classList.remove('theme-transition')
+      }, 300)
+    })
   }, [theme, setTheme])
 
-  if (!mounted) return <div className="h-9 w-9" />
+  if (!mounted) return <div className="h-8 w-8" />
 
   const isDark = theme === 'dark'
 
@@ -34,33 +34,13 @@ export function ThemeToggle() {
       onClick={toggleTheme}
       aria-label="Alternar tema"
       title={isDark ? 'Modo claro' : 'Modo escuro'}
-      className="relative h-9 w-9 overflow-hidden"
+      className="h-8 w-8 rounded-lg"
     >
-      <AnimatePresence mode="wait" initial={false}>
-        {isDark ? (
-          <motion.div
-            key="sun"
-            initial={{ rotate: 90, scale: 0, opacity: 0 }}
-            animate={{ rotate: 0, scale: 1, opacity: 1 }}
-            exit={{ rotate: -90, scale: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="absolute inset-0 flex items-center justify-center"
-          >
-            <Sun className="h-4 w-4" />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="moon"
-            initial={{ rotate: 90, scale: 0, opacity: 0 }}
-            animate={{ rotate: 0, scale: 1, opacity: 1 }}
-            exit={{ rotate: -90, scale: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="absolute inset-0 flex items-center justify-center"
-          >
-            <Moon className="h-4 w-4" />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isDark ? (
+        <Sun className="h-4 w-4" />
+      ) : (
+        <Moon className="h-4 w-4" />
+      )}
     </Button>
   )
 }

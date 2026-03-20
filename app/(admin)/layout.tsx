@@ -2,7 +2,6 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { AdminSidebar } from '@/components/layout/admin-sidebar'
-import { Header } from '@/components/layout/header'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 
 export default async function AdminLayout({
@@ -33,10 +32,19 @@ export default async function AdminLayout({
 
   return (
     <SidebarProvider>
-      <AdminSidebar pendingCount={pendingCount ?? 0} />
+      <AdminSidebar
+        pendingCount={pendingCount ?? 0}
+        user={{
+          id: user.id,
+          full_name: profile.full_name,
+          email: profile.email,
+          avatar_url: profile.avatar_url,
+          role: profile.role,
+          department: profile.department,
+        }}
+      />
       <SidebarInset>
-        <Header user={{ ...profile, id: user.id }} />
-        <main className="flex-1 px-6 py-6 lg:px-8">{children}</main>
+        <div className="flex-1 px-6 py-6 lg:px-8">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   )

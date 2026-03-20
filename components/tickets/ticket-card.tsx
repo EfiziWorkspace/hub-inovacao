@@ -1,19 +1,11 @@
 import Link from 'next/link'
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { TicketStatusBadge } from './ticket-status-badge'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { Building2, Check, Clock, AlertCircle, ChevronRight } from 'lucide-react'
 import type { TicketStatus, DevSubstatus } from '@/lib/types/enums'
-import { OPEN_SUB_LABELS, getDisplayStatus, type DisplayStatus } from '@/lib/constants'
+import { OPEN_SUB_LABELS, getDisplayStatus, DISPLAY_STATUS_DOT_COLORS, type DisplayStatus } from '@/lib/constants'
 import { cn } from '@/lib/utils'
-
-const ACCENT_BORDERS: Record<DisplayStatus, string> = {
-  aberto: 'border-l-warning',
-  em_andamento: 'border-l-info',
-  concluido: 'border-l-success',
-  recusado: 'border-l-destructive',
-}
 
 interface TicketCardProps {
   ticket: {
@@ -46,39 +38,40 @@ export function TicketCard({ ticket }: TicketCardProps) {
 
   return (
     <Link href={`/app/${ticket.id}`}>
-      <Card className={cn(
-        'group border-l-[3px] hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary/5 transition-all duration-200 cursor-pointer h-full',
-        ACCENT_BORDERS[display]
-      )}>
-        <CardHeader className="pb-2">
-          <div className="flex items-start justify-between gap-2">
-            <h3 className="font-medium text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+      <div className="group flex items-center gap-3 rounded-xl border border-border/60 p-3 hover:bg-muted/30 hover:border-primary/20 transition-all duration-200 cursor-pointer">
+        {/* Status dot */}
+        <div className={cn('h-2.5 w-2.5 rounded-full shrink-0', DISPLAY_STATUS_DOT_COLORS[display])} />
+
+        {/* Content */}
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2">
+            <h3 className="text-sm font-medium truncate group-hover:text-primary transition-colors">
               {ticket.title}
             </h3>
-            <TicketStatusBadge status={ticket.status} />
           </div>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          {/* Sub-indicador para status "Aberto" */}
-          {display === 'aberto' && subLabel && (
-            <div className={cn('flex items-center gap-1.5 text-xs', subColor)}>
-              {SubIcon && <SubIcon className="h-3 w-3" />}
-              <span>{subLabel}</span>
-            </div>
-          )}
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3 text-xs text-muted-foreground">
-              <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2 mt-1">
+            {display === 'aberto' && subLabel ? (
+              <span className={cn('text-[11px] flex items-center gap-1', subColor)}>
+                {SubIcon && <SubIcon className="h-3 w-3" />}
+                {subLabel}
+              </span>
+            ) : (
+              <span className="text-[11px] text-muted-foreground flex items-center gap-1">
                 <Building2 className="h-3 w-3" />
-                <span>{ticket.department}</span>
-              </div>
-              <span>{formatDistanceToNow(new Date(ticket.created_at), { addSuffix: true, locale: ptBR })}</span>
-            </div>
-            <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/40 group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
+                {ticket.department}
+              </span>
+            )}
+            <span className="text-[11px] text-muted-foreground/50">·</span>
+            <span className="text-[11px] text-muted-foreground/50">
+              {formatDistanceToNow(new Date(ticket.created_at), { addSuffix: true, locale: ptBR })}
+            </span>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+
+        {/* Status badge + arrow */}
+        <TicketStatusBadge status={ticket.status} />
+        <ChevronRight className="h-4 w-4 text-muted-foreground/30 group-hover:text-primary group-hover:translate-x-0.5 transition-all shrink-0" />
+      </div>
     </Link>
   )
 }

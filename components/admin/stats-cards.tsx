@@ -8,7 +8,7 @@ import {
   Sheet, SheetContent, SheetHeader, SheetTitle,
 } from '@/components/ui/sheet'
 import {
-  TrendingUp, TrendingDown,
+  TrendingUp, TrendingDown, ArrowRight,
   CircleDot, Loader, CheckCircle2, XCircle,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -73,6 +73,13 @@ const STATUS_HOVER_BORDER: Record<DisplayStatus, string> = {
   recusado: 'hover:border-destructive/50',
 }
 
+const STATUS_WATERMARK_COLOR: Record<DisplayStatus, string> = {
+  aberto: 'text-warning',
+  em_andamento: 'text-info',
+  concluido: 'text-success',
+  recusado: 'text-destructive',
+}
+
 export function StatsCards({ pills, ticketsByStatus, isAdmin }: StatsCardsProps) {
   const [activeStatus, setActiveStatus] = useState<DisplayStatus | null>(null)
   const activeTickets = activeStatus ? ticketsByStatus[activeStatus] ?? [] : []
@@ -89,12 +96,18 @@ export function StatsCards({ pills, ticketsByStatus, isAdmin }: StatsCardsProps)
               className="group text-left"
             >
               <Card className={cn(
-                'transition-all duration-200 cursor-pointer',
-                'hover:-translate-y-0.5 hover:shadow-md',
+                'relative overflow-hidden transition-all duration-200 cursor-pointer',
+                'hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10',
                 STATUS_HOVER_BORDER[pill.display],
-                activeStatus === pill.display && 'border-primary/60 ring-1 ring-primary/20'
+                activeStatus === pill.display && 'border-primary/60 ring-2 ring-primary/30'
               )}>
-                <CardContent className="pt-5 pb-4">
+                {/* Watermark icon */}
+                <Icon className={cn(
+                  'absolute right-2 bottom-2 h-16 w-16 opacity-[0.04] pointer-events-none',
+                  STATUS_WATERMARK_COLOR[pill.display]
+                )} />
+
+                <CardContent className="relative pt-5 pb-4">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2.5">
                       <div className={cn(
@@ -109,7 +122,7 @@ export function StatsCards({ pills, ticketsByStatus, isAdmin }: StatsCardsProps)
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <p className="text-3xl font-bold">{pill.count}</p>
+                    <p className="text-4xl font-bold">{pill.count}</p>
                     {pill.trend !== undefined && pill.trend !== 0 && (
                       <span className={cn(
                         'flex items-center gap-0.5 text-xs font-medium',
@@ -120,8 +133,9 @@ export function StatsCards({ pills, ticketsByStatus, isAdmin }: StatsCardsProps)
                       </span>
                     )}
                   </div>
-                  <p className="text-[10px] text-muted-foreground mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  <p className="flex items-center gap-1 text-[10px] text-muted-foreground mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                     Clique para ver
+                    <ArrowRight className="h-2.5 w-2.5" />
                   </p>
                 </CardContent>
               </Card>
@@ -154,7 +168,7 @@ export function StatsCards({ pills, ticketsByStatus, isAdmin }: StatsCardsProps)
                       >
                         <p className="text-sm font-medium truncate">{ticket.title}</p>
                         <div className="flex items-center justify-between mt-1.5 text-xs text-muted-foreground">
-                          <span>{ticket.profiles?.full_name ?? '—'} · {ticket.department}</span>
+                          <span>{ticket.profiles?.full_name ?? '\u2014'} · {ticket.department}</span>
                           <span>{formatDistanceToNow(new Date(ticket.updated_at), { addSuffix: true, locale: ptBR })}</span>
                         </div>
                       </Link>

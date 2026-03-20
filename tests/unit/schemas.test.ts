@@ -8,10 +8,21 @@ describe('createTicketSchema', () => {
       title: 'Sistema de automação',
       description: 'Um sistema para automatizar processos internos da empresa',
       department: 'Tecnologia',
-      doc_urls: [],
+      doc_urls: ['docs/proposta.pdf'],
       prototype_url: null,
     })
     expect(result.success).toBe(true)
+  })
+
+  it('rejects empty doc_urls', () => {
+    const result = createTicketSchema.safeParse({
+      title: 'Sistema de automação',
+      description: 'Um sistema para automatizar processos internos da empresa',
+      department: 'Tecnologia',
+      doc_urls: [],
+      prototype_url: null,
+    })
+    expect(result.success).toBe(false)
   })
 
   it('rejects short title', () => {
@@ -41,16 +52,13 @@ describe('createTicketSchema', () => {
     expect(result.success).toBe(false)
   })
 
-  it('defaults doc_urls to empty array', () => {
+  it('requires doc_urls', () => {
     const result = createTicketSchema.safeParse({
       title: 'Título válido para teste',
       description: 'Uma descrição com mais de vinte caracteres válidos',
       department: 'Tecnologia',
     })
-    expect(result.success).toBe(true)
-    if (result.success) {
-      expect(result.data.doc_urls).toEqual([])
-    }
+    expect(result.success).toBe(false)
   })
 })
 

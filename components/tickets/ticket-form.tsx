@@ -226,13 +226,15 @@ export function TicketForm({ userId, defaultDepartment, template }: TicketFormPr
           <SectionHeader icon={FileText} title="Documentação" />
 
           <div className="space-y-2">
-            <FormLabel>Documentação de apoio</FormLabel>
+            <FormLabel className="flex items-center gap-1.5">
+              Documentação de apoio
+              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+            </FormLabel>
             <FileUpload
               userId={userId}
               ticketTempId={tempId}
-              accept=".pdf,.doc,.docx"
-              maxFiles={5}
-              label="Envie PDFs ou documentos Word"
+              label="Envie PDFs, documentos Word ou imagens"
+              required
               onUpload={setDocUrls}
             />
           </div>
@@ -245,8 +247,6 @@ export function TicketForm({ userId, defaultDepartment, template }: TicketFormPr
             <FileUpload
               userId={userId}
               ticketTempId={tempId}
-              accept=".html"
-              maxFiles={1}
               label="Envie um protótipo HTML"
               onUpload={(urls) => setPrototypeUrl(urls[0] ?? null)}
             />

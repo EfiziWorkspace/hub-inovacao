@@ -54,123 +54,124 @@
 
 :root {
   /* === EFIZI DESIGN SYSTEM === */
-  /* Extracted from www.efizi.com.br */
 
   /* === BASE === */
-  --background: oklch(0.975 0 0);
-  --foreground: oklch(0.15 0 0);
+  --background: oklch(0.97 0.002 75);
+  --foreground: oklch(0.18 0.01 35);
 
   /* === CARD === */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0 0);
+  --card-foreground: oklch(0.18 0.01 35);
 
-  /* === POPOVER / DROPDOWN / TOOLTIP === */
+  /* === POPOVER === */
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0 0);
+  --popover-foreground: oklch(0.18 0.01 35);
 
   /* === PRIMARY (Efizi Orange) === */
   --primary: oklch(0.68 0.21 35);
   --primary-foreground: oklch(1 0 0);
 
-  /* === SECONDARY (Teal accent) === */
-  --secondary: oklch(0.52 0.09 180);
+  /* === SECONDARY (Efizi Teal) === */
+  --secondary: oklch(0.55 0.12 180);
   --secondary-foreground: oklch(1 0 0);
 
   /* === MUTED === */
-  --muted: oklch(0.95 0 0);
-  --muted-foreground: oklch(0.55 0 0);
+  --muted: oklch(0.94 0.005 75);
+  --muted-foreground: oklch(0.50 0.01 35);
 
   /* === ACCENT === */
-  --accent: oklch(0.95 0 0);
-  --accent-foreground: oklch(0.15 0 0);
+  --accent: oklch(0.94 0.008 35);
+  --accent-foreground: oklch(0.18 0.01 35);
 
   /* === DESTRUCTIVE === */
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(1 0 0);
 
   /* === BORDERS & INPUTS === */
-  --border: oklch(0.88 0 0);
-  --input: oklch(0.81 0 0);
+  --border: oklch(0.90 0.005 75);
+  --input: oklch(0.85 0.005 75);
   --ring: oklch(0.68 0.21 35);
 
   /* === BORDER RADIUS === */
-  --radius: 0.5rem;
+  --radius: 0.625rem;
 
-  /* === CHART COLORS === */
+  /* === CHART COLORS (Efizi palette) === */
   --chart-1: oklch(0.68 0.21 35);
-  --chart-2: oklch(0.52 0.09 180);
-  --chart-3: oklch(0.646 0.222 41.116);
-  --chart-4: oklch(0.6 0.118 184.704);
-  --chart-5: oklch(0.769 0.188 70.08);
+  --chart-2: oklch(0.55 0.12 180);
+  --chart-3: oklch(0.65 0.18 45);
+  --chart-4: oklch(0.58 0.10 190);
+  --chart-5: oklch(0.72 0.16 65);
 
-  /* === SIDEBAR === */
-  --sidebar: oklch(1 0 0);
-  --sidebar-foreground: oklch(0.15 0 0);
+  /* === SIDEBAR (Light — follows theme) === */
+  --sidebar: oklch(0.985 0.002 75);
+  --sidebar-foreground: oklch(0.25 0.01 35);
   --sidebar-primary: oklch(0.68 0.21 35);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.95 0 0);
-  --sidebar-accent-foreground: oklch(0.15 0 0);
-  --sidebar-border: oklch(0.88 0 0);
+  --sidebar-accent: oklch(0.94 0.008 35);
+  --sidebar-accent-foreground: oklch(0.18 0.01 35);
+  --sidebar-border: oklch(0.90 0.005 75);
   --sidebar-ring: oklch(0.68 0.21 35);
 
-  /* === CUSTOM SEMANTIC COLORS === */
-  --success: oklch(0.6 0.15 145);
+  /* === SEMANTIC COLORS === */
+  --success: oklch(0.62 0.17 145);
   --success-foreground: oklch(1 0 0);
   --warning: oklch(0.75 0.15 75);
-  --warning-foreground: oklch(0.15 0 0);
-  --info: oklch(0.6 0.15 250);
+  --warning-foreground: oklch(0.18 0 0);
+  --info: oklch(0.62 0.17 250);
   --info-foreground: oklch(1 0 0);
 }
 
 .dark {
-  --background: oklch(0.15 0 0);
-  --foreground: oklch(0.985 0 0);
+  /* === Dark Mode — Neutro/frio, cores vibrantes === */
 
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
+  --background: oklch(0.11 0.005 260);
+  --foreground: oklch(0.96 0 0);
 
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
+  --card: oklch(0.15 0.005 260);
+  --card-foreground: oklch(0.96 0 0);
 
-  --primary: oklch(0.68 0.21 35);
+  --popover: oklch(0.15 0.005 260);
+  --popover-foreground: oklch(0.96 0 0);
+
+  --primary: oklch(0.72 0.22 35);
   --primary-foreground: oklch(1 0 0);
 
-  --secondary: oklch(0.52 0.09 180);
+  --secondary: oklch(0.60 0.14 180);
   --secondary-foreground: oklch(1 0 0);
 
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
+  --muted: oklch(0.18 0.005 260);
+  --muted-foreground: oklch(0.60 0.005 260);
 
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --accent: oklch(0.18 0.008 260);
+  --accent-foreground: oklch(0.96 0 0);
 
-  --destructive: oklch(0.704 0.191 22.216);
+  --destructive: oklch(0.72 0.22 22);
   --destructive-foreground: oklch(1 0 0);
 
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.68 0.21 35);
+  --border: oklch(0.22 0.008 260);
+  --input: oklch(0.20 0.008 260);
+  --ring: oklch(0.72 0.22 35);
 
-  --chart-1: oklch(0.68 0.21 35);
-  --chart-2: oklch(0.52 0.09 180);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
+  --chart-1: oklch(0.72 0.22 35);
+  --chart-2: oklch(0.60 0.14 180);
+  --chart-3: oklch(0.74 0.18 50);
+  --chart-4: oklch(0.62 0.14 190);
+  --chart-5: oklch(0.76 0.16 65);
 
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.68 0.21 35);
+  --sidebar: oklch(0.09 0.005 260);
+  --sidebar-foreground: oklch(0.85 0 0);
+  --sidebar-primary: oklch(0.72 0.22 35);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.68 0.21 35);
+  --sidebar-accent: oklch(0.15 0.008 260);
+  --sidebar-accent-foreground: oklch(0.96 0 0);
+  --sidebar-border: oklch(0.18 0.005 260);
+  --sidebar-ring: oklch(0.72 0.22 35);
 
-  --success: oklch(0.65 0.15 145);
+  --success: oklch(0.72 0.19 145);
   --success-foreground: oklch(1 0 0);
-  --warning: oklch(0.8 0.15 75);
+  --warning: oklch(0.80 0.17 75);
   --warning-foreground: oklch(0.15 0 0);
-  --info: oklch(0.65 0.15 250);
+  --info: oklch(0.72 0.19 250);
   --info-foreground: oklch(1 0 0);
 }
 
@@ -179,16 +180,40 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
-  html.theme-transition,
-  html.theme-transition *,
-  html.theme-transition *::before,
-  html.theme-transition *::after {
-    transition: background-color 0.3s ease, color 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+
+  /* Typography hierarchy */
+  h1 { @apply text-2xl font-bold tracking-tight; }
+  h2 { @apply text-xl font-semibold tracking-tight; }
+  h3 { @apply text-base font-semibold; }
+
+  /* Theme transition — only on key elements, not * (performance) */
+  html.theme-transition body,
+  html.theme-transition header,
+  html.theme-transition main,
+  html.theme-transition [data-sidebar],
+  html.theme-transition .border-b,
+  html.theme-transition [class*="bg-background"],
+  html.theme-transition [class*="bg-card"] {
+    transition: background-color 0.25s ease, border-color 0.25s ease !important;
   }
+
+  /* Sidebar — no border */
+  [data-slot="sidebar"] {
+    border-right: none !important;
+    border-left: none !important;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--muted-foreground); border-radius: 999px; opacity: 0.3; }
+  ::-webkit-scrollbar-thumb:hover { opacity: 0.5; }
 }
+
+/* === ANIMATIONS === */
 
 @keyframes float-slow {
   0%, 100% { transform: translateY(0px) translateX(0px); }
@@ -243,25 +268,9 @@
   100% { transform: translateX(100%); }
 }
 
-@keyframes celebrate {
-  0% { transform: scale(0) rotate(0deg); opacity: 1; }
-  50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
-  100% { transform: scale(0) rotate(360deg); opacity: 0; }
-}
-
-@keyframes line-draw {
-  from { height: 0; }
-  to { height: 100%; }
-}
-
-@keyframes progress-fill {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes badge-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
 }
 
 .animate-float-slow { animation: float-slow 7s ease-in-out infinite; }
@@ -275,3 +284,4 @@
 .animate-fade-up { animation: fade-up 0.6s ease forwards; }
 .animate-spin-slow { animation: spin-slow 20s linear infinite; }
 .animate-drift { animation: drift linear infinite; }
+.animate-glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }

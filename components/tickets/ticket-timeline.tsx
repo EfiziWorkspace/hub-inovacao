@@ -99,7 +99,10 @@ export function TicketTimeline({ events }: { events: TimelineEvent[] }) {
   return (
     <div className="space-y-0">
       {events.map((event, index) => {
-        const Icon = EVENT_ICONS[event.event_type]
+        // Use XCircle for rejected status changes
+        const Icon = (event.event_type === 'status_changed' && event.new_value === 'recusado')
+          ? XCircle
+          : EVENT_ICONS[event.event_type]
         const isLast = index === events.length - 1
         const colors = getEventColor(event.event_type, event.new_value)
 
