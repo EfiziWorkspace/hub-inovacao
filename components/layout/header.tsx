@@ -2,15 +2,11 @@
 
 import { usePathname } from 'next/navigation'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-  DropdownMenuLabel,
+  DropdownMenu, DropdownMenuContent, DropdownMenuItem,
+  DropdownMenuSeparator, DropdownMenuTrigger, DropdownMenuLabel,
 } from '@/components/ui/dropdown-menu'
+import { SidebarTrigger } from '@/components/ui/sidebar'
 import { signOut } from '@/actions/auth'
 import { ThemeToggle } from '@/components/layout/theme-toggle'
 import { Notifications } from '@/components/layout/notifications'
@@ -30,37 +26,21 @@ interface HeaderProps {
 const BREADCRUMB_MAP: Record<string, string> = {
   '/app': 'Meus Chamados',
   '/app/novo': 'Nova Ideia',
+  '/app/mentoria': 'Mentoria',
   '/admin': 'Dashboard',
   '/admin/fila': 'Fila de Revisão',
   '/admin/projetos': 'Projetos',
+  '/admin/templates': 'Templates',
+  '/admin/mentoria': 'Mentoria',
 }
 
 function getBreadcrumbs(pathname: string): Array<{ label: string; href?: string }> {
-  if (BREADCRUMB_MAP[pathname]) {
-    return [{ label: BREADCRUMB_MAP[pathname] }]
-  }
-
-  if (pathname.startsWith('/app/novo')) {
-    return [
-      { label: 'Meus Chamados', href: '/app' },
-      { label: 'Nova Ideia' },
-    ]
-  }
-
-  if (pathname.startsWith('/app/')) {
-    return [
-      { label: 'Meus Chamados', href: '/app' },
-      { label: 'Detalhes' },
-    ]
-  }
-
-  if (pathname.startsWith('/admin/projetos/')) {
-    return [
-      { label: 'Projetos', href: '/admin/projetos' },
-      { label: 'Detalhes' },
-    ]
-  }
-
+  if (BREADCRUMB_MAP[pathname]) return [{ label: BREADCRUMB_MAP[pathname] }]
+  if (pathname.startsWith('/app/novo')) return [{ label: 'Meus Chamados', href: '/app' }, { label: 'Nova Ideia' }]
+  if (pathname.startsWith('/app/mentoria')) return [{ label: 'Mentoria' }]
+  if (pathname.startsWith('/app/')) return [{ label: 'Meus Chamados', href: '/app' }, { label: 'Detalhes' }]
+  if (pathname.startsWith('/admin/projetos/')) return [{ label: 'Projetos', href: '/admin/projetos' }, { label: 'Detalhes' }]
+  if (pathname.startsWith('/admin/mentoria')) return [{ label: 'Mentoria' }]
   return []
 }
 
@@ -76,19 +56,22 @@ export function Header({ user }: HeaderProps) {
     .toUpperCase()
 
   return (
-    <header className="flex h-12 items-center gap-3 border-b border-border/40 px-4 lg:px-6">
+    <div className="flex h-12 items-center gap-3 px-4 lg:px-6">
+      {/* Mobile sidebar trigger */}
+      <SidebarTrigger className="lg:hidden -ml-1 h-8 w-8" />
+
       {/* Breadcrumb */}
       {breadcrumbs.length > 0 && (
-        <nav className="flex items-center gap-1 text-sm">
+        <nav className="hidden sm:flex items-center gap-1.5 text-sm">
           {breadcrumbs.map((crumb, i) => (
-            <span key={i} className="flex items-center gap-1">
-              {i > 0 && <ChevronRight className="h-3 w-3 text-muted-foreground/40" />}
+            <span key={i} className="flex items-center gap-1.5">
+              {i > 0 && <ChevronRight className="h-3 w-3 text-muted-foreground/30" />}
               {crumb.href ? (
                 <a href={crumb.href} className="text-muted-foreground hover:text-foreground transition-colors">
                   {crumb.label}
                 </a>
               ) : (
-                <span className="text-foreground/80 font-medium">{crumb.label}</span>
+                <span className="text-foreground font-semibold">{crumb.label}</span>
               )}
             </span>
           ))}
@@ -97,7 +80,8 @@ export function Header({ user }: HeaderProps) {
 
       <div className="flex-1" />
 
-      <div className="flex items-center gap-0.5">
+      {/* Actions — pill container */}
+      <div className="flex items-center gap-0.5 rounded-full bg-muted/40 px-1 py-0.5">
         {user.id && (
           <Notifications
             role={(user.role as 'admin' | 'collaborator') ?? 'collaborator'}
@@ -108,16 +92,17 @@ export function Header({ user }: HeaderProps) {
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full ml-1">
-              <Avatar className="h-7 w-7">
+            <button className="flex items-center gap-1.5 rounded-full pl-0.5 pr-2.5 py-0.5 hover:bg-background/60 transition-colors">
+              <Avatar className="h-6 w-6">
                 <AvatarImage src={user.avatar_url ?? undefined} alt={user.full_name} />
-                <AvatarFallback className="text-[10px] bg-primary/10 text-primary">{initials}</AvatarFallback>
+                <AvatarFallback className="text-[9px] bg-primary/10 text-primary font-semibold">{initials}</AvatarFallback>
               </Avatar>
-            </Button>
+              <span className="text-xs font-medium hidden sm:block">{user.full_name.split(' ')[0]}</span>
+            </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-52">
             <DropdownMenuLabel className="font-normal">
-              <p className="text-sm font-medium">{user.full_name}</p>
+              <p className="text-sm font-semibold">{user.full_name}</p>
               <p className="text-xs text-muted-foreground truncate">{user.email}</p>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
@@ -132,6 +117,6 @@ export function Header({ user }: HeaderProps) {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-    </header>
+    </div>
   )
 }

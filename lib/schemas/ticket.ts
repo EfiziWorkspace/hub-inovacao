@@ -15,7 +15,7 @@ export const createTicketSchema = z.object({
     .refine((val) => DEPARTMENTS.includes(val), {
       message: 'Selecione um setor válido',
     }),
-  doc_urls: z.array(z.string()).default([]),
+  doc_urls: z.array(z.string()).min(1, 'Envie pelo menos 1 documento'),
   prototype_url: z.string().nullable().default(null),
 })
 

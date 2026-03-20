@@ -1,34 +1,57 @@
 'use client'
 
-import { Lightbulb } from 'lucide-react'
+import { EfiziLogo } from '@/components/brand/efizi-logo'
+import { Sparkles } from 'lucide-react'
 
 const particles = [
-  { size: 6, left: '12%', delay: '0s', duration: '14s', opacity: 0.3 },
-  { size: 4, left: '28%', delay: '2s', duration: '11s', opacity: 0.2 },
-  { size: 8, left: '45%', delay: '4s', duration: '16s', opacity: 0.25 },
-  { size: 5, left: '62%', delay: '1s', duration: '13s', opacity: 0.2 },
-  { size: 7, left: '78%', delay: '3s', duration: '12s', opacity: 0.3 },
-  { size: 3, left: '90%', delay: '5s', duration: '15s', opacity: 0.15 },
-  { size: 5, left: '20%', delay: '6s', duration: '10s', opacity: 0.2 },
-  { size: 4, left: '55%', delay: '7s', duration: '18s', opacity: 0.25 },
+  { size: 5, left: '10%', delay: '0s', duration: '16s', opacity: 0.2 },
+  { size: 3, left: '25%', delay: '2s', duration: '12s', opacity: 0.15 },
+  { size: 7, left: '40%', delay: '4s', duration: '18s', opacity: 0.2 },
+  { size: 4, left: '58%', delay: '1s', duration: '14s', opacity: 0.15 },
+  { size: 6, left: '72%', delay: '3s', duration: '13s', opacity: 0.25 },
+  { size: 3, left: '88%', delay: '5s', duration: '17s', opacity: 0.12 },
+  { size: 5, left: '15%', delay: '7s', duration: '11s', opacity: 0.18 },
+  { size: 4, left: '50%', delay: '6s', duration: '19s', opacity: 0.2 },
+  { size: 6, left: '35%', delay: '8s', duration: '15s', opacity: 0.15 },
+  { size: 3, left: '80%', delay: '9s', duration: '13s', opacity: 0.12 },
 ]
 
 export function BrandSide() {
   return (
-    <div className="hidden lg:flex lg:w-1/2 flex-col justify-between p-12 text-white relative overflow-hidden select-none">
-      {/* Fundo com gradiente animado */}
+    <div className="hidden lg:flex lg:w-[55%] flex-col justify-between p-12 text-white relative overflow-hidden select-none">
+      {/* Animated gradient background — richer, more movement */}
       <div
         className="absolute inset-0 animate-gradient-shift"
         style={{
-          background: 'linear-gradient(135deg, oklch(0.62 0.22 32), oklch(0.72 0.21 38), oklch(0.58 0.20 28), oklch(0.68 0.21 35))',
-          backgroundSize: '300% 300%',
+          background: `linear-gradient(
+            135deg,
+            oklch(0.55 0.24 28) 0%,
+            oklch(0.65 0.22 33) 25%,
+            oklch(0.70 0.21 38) 50%,
+            oklch(0.60 0.23 30) 75%,
+            oklch(0.55 0.24 28) 100%
+          )`,
+          backgroundSize: '400% 400%',
         }}
       />
 
-      {/* Overlay escuro sutil para profundidade */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-black/20" />
+      {/* Secondary layer — moving mesh gradient */}
+      <div
+        className="absolute inset-0 animate-gradient-shift opacity-50"
+        style={{
+          background: `radial-gradient(ellipse 80% 50% at 20% 80%, oklch(0.72 0.18 42 / 0.6) 0%, transparent 60%),
+                       radial-gradient(ellipse 60% 40% at 80% 20%, oklch(0.58 0.25 25 / 0.4) 0%, transparent 50%)`,
+          backgroundSize: '200% 200%',
+          animationDuration: '8s',
+          animationDirection: 'reverse',
+        }}
+      />
 
-      {/* Partículas flutuantes */}
+      {/* Depth overlays */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black/15 via-transparent to-black/25" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+
+      {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {particles.map((p, i) => (
           <div
@@ -47,92 +70,74 @@ export function BrandSide() {
         ))}
       </div>
 
-      {/* Círculo grande decorativo — top right */}
+      {/* Decorative circles — orbital feel */}
       <div
-        className="absolute -top-32 -right-32 w-[420px] h-[420px] rounded-full border border-white/10 animate-spin-slow pointer-events-none"
-        style={{ animationDuration: '30s' }}
+        className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full border border-white/[0.06] animate-spin-slow pointer-events-none"
+        style={{ animationDuration: '40s' }}
       />
       <div
-        className="absolute -top-20 -right-20 w-[280px] h-[280px] rounded-full border border-white/10 animate-spin-slow pointer-events-none"
-        style={{ animationDuration: '20s', animationDirection: 'reverse' }}
+        className="absolute -top-24 -right-24 w-[340px] h-[340px] rounded-full border border-white/[0.08] animate-spin-slow pointer-events-none"
+        style={{ animationDuration: '25s', animationDirection: 'reverse' }}
       />
-
-      {/* Orb flutuante 1 */}
       <div
-        className="absolute top-1/4 -right-16 w-48 h-48 rounded-full bg-white/5 blur-xl animate-float-slow pointer-events-none"
-        style={{ animationDelay: '1s' }}
-      />
-      {/* Orb flutuante 2 */}
-      <div
-        className="absolute bottom-1/3 -left-10 w-36 h-36 rounded-full bg-white/5 blur-xl animate-float-medium pointer-events-none"
-        style={{ animationDelay: '3s' }}
+        className="absolute -bottom-20 -left-20 w-[280px] h-[280px] rounded-full border border-white/[0.05] animate-spin-slow pointer-events-none"
+        style={{ animationDuration: '35s' }}
       />
 
-      {/* Conteúdo */}
-      <div className="relative flex items-center gap-2.5 animate-fade-up" style={{ animationDelay: '0.1s' }}>
-        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm border border-white/20">
-          <Lightbulb className="h-5 w-5 text-white" />
-        </div>
-        <span className="font-bold text-lg tracking-wide">Efizi</span>
+      {/* Floating orbs */}
+      <div className="absolute top-1/4 -right-20 w-56 h-56 rounded-full bg-white/[0.04] blur-2xl animate-float-slow pointer-events-none" />
+      <div className="absolute bottom-1/4 -left-12 w-40 h-40 rounded-full bg-white/[0.05] blur-2xl animate-float-medium pointer-events-none" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-1/2 left-1/3 w-32 h-32 rounded-full bg-white/[0.03] blur-3xl animate-float-fast pointer-events-none" style={{ animationDelay: '4s' }} />
+
+      {/* Content */}
+
+      {/* Top — Logo */}
+      <div className="relative animate-fade-up" style={{ animationDelay: '0.1s' }}>
+        <EfiziLogo className="h-8 w-auto" color="white" />
       </div>
 
-      <div className="relative space-y-6">
-        {/* Ícone central com anéis pulsantes */}
-        <div
-          className="animate-fade-up"
-          style={{ animationDelay: '0.2s', opacity: 0 }}
-        >
-          <div className="relative inline-flex items-center justify-center mb-8">
-            {/* Anéis pulsantes */}
-            <div className="absolute w-20 h-20 rounded-full border-2 border-white/30 animate-pulse-ring" />
-            <div
-              className="absolute w-20 h-20 rounded-full border-2 border-white/20 animate-pulse-ring"
-              style={{ animationDelay: '0.8s' }}
-            />
-            <div
-              className="absolute w-20 h-20 rounded-full border border-white/10 animate-pulse-ring"
-              style={{ animationDelay: '1.6s' }}
-            />
-            {/* Ícone central */}
-            <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 shadow-2xl animate-float-fast">
-              <Lightbulb className="h-9 w-9 text-white drop-shadow-lg" />
+      {/* Center — Hero */}
+      <div className="relative space-y-8">
+        {/* Icon with pulse rings */}
+        <div className="animate-fade-up" style={{ animationDelay: '0.2s', opacity: 0 }}>
+          <div className="relative inline-flex items-center justify-center mb-4">
+            <div className="absolute w-24 h-24 rounded-full border-2 border-white/20 animate-pulse-ring" />
+            <div className="absolute w-24 h-24 rounded-full border border-white/15 animate-pulse-ring" style={{ animationDelay: '0.8s' }} />
+            <div className="absolute w-24 h-24 rounded-full border border-white/10 animate-pulse-ring" style={{ animationDelay: '1.6s' }} />
+            <div className="relative flex h-24 w-24 items-center justify-center rounded-3xl bg-white/15 backdrop-blur-md border border-white/20 shadow-2xl animate-float-fast">
+              <Sparkles className="h-10 w-10 text-white drop-shadow-lg" />
             </div>
           </div>
         </div>
 
-        <div
-          className="animate-fade-up"
-          style={{ animationDelay: '0.35s', opacity: 0 }}
-        >
-          <h1 className="text-4xl font-bold mb-4 leading-tight">
-            Painel de<br />Inovação
+        <div className="animate-fade-up" style={{ animationDelay: '0.35s', opacity: 0 }}>
+          <h1 className="text-5xl font-bold leading-[1.1] tracking-tight">
+            Hub de<br />
+            <span className="text-white/90">Inovação</span>
           </h1>
-          <p className="text-white/75 text-base leading-relaxed max-w-xs">
-            Transforme suas ideias em realidade. Submeta propostas, acompanhe o
-            status e veja sua ideia ganhar vida.
+          <p className="text-white/65 text-base leading-relaxed max-w-sm mt-5">
+            Onde as ideias dos times Efizi ganham vida. Submeta propostas,
+            acompanhe o progresso e transforme inovação em resultado.
           </p>
         </div>
 
-        {/* Stats rápidos */}
-        <div
-          className="animate-fade-up flex gap-6 mt-2"
-          style={{ animationDelay: '0.5s', opacity: 0 }}
-        >
-          {[
-            { label: 'Ideias enviadas', value: '∞' },
-            { label: 'Times', value: '10+' },
-            { label: 'Em produção', value: '🚀' },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <p className="text-2xl font-bold text-white">{stat.value}</p>
-              <p className="text-xs text-white/60 mt-0.5">{stat.label}</p>
+        {/* Social proof */}
+        <div className="animate-fade-up" style={{ animationDelay: '0.5s', opacity: 0 }}>
+          <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.08] backdrop-blur-sm border border-white/[0.1] max-w-xs">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15">
+              <Sparkles className="h-5 w-5 text-white" />
             </div>
-          ))}
+            <div>
+              <p className="text-sm font-semibold text-white">Plataforma ativa</p>
+              <p className="text-xs text-white/50 mt-0.5">Ideias em tempo real dos times Efizi</p>
+            </div>
+          </div>
         </div>
       </div>
 
+      {/* Bottom — Footer */}
       <p
-        className="relative text-white/50 text-xs animate-fade-up"
+        className="relative text-white/40 text-xs animate-fade-up"
         style={{ animationDelay: '0.6s', opacity: 0 }}
       >
         © {new Date().getFullYear()} Efizi. Todos os direitos reservados.

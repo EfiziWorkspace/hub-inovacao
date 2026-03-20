@@ -147,15 +147,21 @@ export async function reopenTicket(ticketId: string, comment?: string) {
   return { success: true }
 }
 
-export async function requestReopen(ticketId: string, comment: string) {
+export async function requestReopen(ticketId: string, comment: string, newDocUrls?: string[]) {
   const { user } = await getAuthenticatedUser()
 
   const admin = createAdminClient()
 
+  // Build update object — replace docs if new ones provided
+  const updateData: Record<string, unknown> = { status: 'reopen_requested' }
+  if (newDocUrls && newDocUrls.length > 0) {
+    updateData.doc_urls = newDocUrls
+  }
+
   // Atomic: UPDATE only if user owns ticket and status allows
   const { data: updated, error } = await admin
     .from('tickets')
-    .update({ status: 'reopen_requested' })
+    .update(updateData)
     .eq('id', ticketId)
     .eq('author_id', user.id)
     .in('status', ['concluido', 'recusado'])

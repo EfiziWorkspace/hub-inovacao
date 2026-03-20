@@ -1,7 +1,6 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { AppSidebar } from '@/components/layout/app-sidebar'
-import { Header } from '@/components/layout/header'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 
 export default async function CollaboratorLayout({
@@ -43,8 +42,7 @@ export default async function CollaboratorLayout({
         }}
       />
       <SidebarInset>
-        <Header user={{ ...profile, id: user.id }} />
-        <main className="flex-1 px-6 py-6 lg:px-8">{children}</main>
+        <div className="flex-1 px-6 py-6 lg:px-8">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   )

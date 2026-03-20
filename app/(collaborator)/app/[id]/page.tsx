@@ -125,7 +125,7 @@ export default async function TicketDetailPage({ params }: { params: Promise<{ i
                 Sua solicitação será enviada para o admin avaliar.
               </p>
             </div>
-            <RequestReopenButton ticketId={ticket.id} />
+            <RequestReopenButton ticketId={ticket.id} userId={user.id} />
           </CardContent>
         </Card>
       )}
